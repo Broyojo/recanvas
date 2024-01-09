@@ -46,6 +46,7 @@ def sync():
                     # get relevant fields for reclaim task from canvas assignment
                     id = assignment.id
                     if id in blacklist:
+                        tqdm.write(f"Skipping {assignment.name} because it is blacklisted")
                         continue
                     name = assignment.name
                     description = f"""**Course: {course.name}**
@@ -95,9 +96,15 @@ Canvas Assignment ID: {id}"""
                     with (tasks[id] if id in tasks else ReclaimTask()) as task:
                         if id not in tasks:
                             tqdm.write(f"Adding {name}")
+                        if task.name != name:
+                            tqdm.write(f"Updating {task.name} to {name}")
                         task.name = name
                         task.description = description
+                        if task.start_date != start_date:
+                            tqdm.write(f"Updating {task.name} start date from {task.start_date} to {start_date}")
                         task.start_date = start_date
+                        if task.due_date != due_date:
+                            tqdm.write(f"Updating {task.name} due date from {task.due_date} to {due_date}")
                         task.due_date = due_date
                         task.duration = task.duration if id in tasks and not FORCE_UPDATE_DURATION else duration
                         task.min_work_duration = min_work_duration
