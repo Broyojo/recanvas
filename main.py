@@ -105,6 +105,6 @@ def sync():
     for id, task in tasks.items():
         if id not in assignments or id in blacklist:
             print(f"Deleting {task.name}")
-            task.delete()
+            task.delete() # maybe just mark it as done instead so it isn't destructive?
 
 sync()
