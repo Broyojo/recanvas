@@ -48,7 +48,12 @@ def sync():
                     if id in blacklist:
                         continue
                     name = assignment.name
-                    description = f"**Course: {course.name}**\n\n" + (md(assignment.description) if assignment.description is not None else "") + f"\n\nCanvas Assignment ID: {id}"
+                    description = f"""**Course: {course.name}**
+
+{md(assignment.description) if assignment.description is not None else ""}
+
+[Link to Canvas Assignment]({assignment.html_url})
+Canvas Assignment ID: {id}"""
                     start_date = assignment.unlock_at_date if "unlock_at_date" in assignment.__dict__ is not None else assignment.created_at_date
                     due_date = assignment.due_at_date
                     duration = 1
