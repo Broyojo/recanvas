@@ -53,6 +53,8 @@ def sync():
                     due_date = assignment.due_at_date
                     duration = 1
                     
+                    # TODO: use AI to figure out how long these should be
+                    
                     if "Lecture Attendance" in name:
                         duration = 0.25
                         start_date = start_date.replace(hour=21, minute=45) # fix all the times to be after lecture
@@ -70,10 +72,16 @@ def sync():
                     submission = assignment.get_submission(canvas_user)
                     if "submitted_at" in submission.__dict__:
                         if submission.submitted_at is not None:
-                            if id in tasks:
-                                print(f"Marking {tasks[id].name} as complete")
-                                tasks[id].mark_complete()
-                                assignments[id] = assignment
+                            # if it is submitted on canvas, we don't delete it from here because
+                            # we can try it a few more times and then confirm the thing done
+                            # once we mark it done on reclaim
+
+                            # if id in tasks:
+                            #     print(f"Marking {tasks[id].name} as complete")
+                            #     tasks[id].mark_complete()
+                            #     assignments[id] = assignment
+                            
+                            assignments[id] = assignment
                             continue
 
                     # add or edit task in reclaim
