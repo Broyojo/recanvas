@@ -52,6 +52,8 @@ def sync():
                     start_date = assignment.unlock_at_date if "unlock_at_date" in assignment.__dict__ is not None else assignment.created_at_date
                     due_date = assignment.due_at_date
                     duration = 1
+                    min_work_duration = 0.5
+                    max_work_duration = 2
                     
                     # TODO: use AI to figure out how long these should be
                     
@@ -93,6 +95,8 @@ def sync():
                         task.start_date = start_date
                         task.due_date = due_date
                         task.duration = task.duration if id in tasks and not FORCE_UPDATE_DURATION else duration
+                        task.min_work_duration = min_work_duration
+                        task.max_work_duration = max_work_duration
                         task.is_work_task = True
 
                     assignments[id] = assignment
