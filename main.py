@@ -34,7 +34,7 @@ def sync():
     # return
 
     # update duration regardless of what is on the calendar already
-    FORCE_UPDATE_DURATION = True
+    FORCE_UPDATE_DURATION = False
 
     assignments = {}
 
@@ -106,6 +106,7 @@ Canvas Assignment ID: {id}"""
                         if task.due_date != due_date:
                             tqdm.write(f"Updating {task.name} due date from {task.due_date} to {due_date}")
                         task.due_date = due_date
+                        # TODO: maybe only add duration if it wasn't already on reclaim
                         task.duration = task.duration if id in tasks and not FORCE_UPDATE_DURATION else duration
                         task.min_work_duration = min_work_duration
                         task.max_work_duration = max_work_duration
