@@ -86,6 +86,8 @@ def sync():
 
                     # add or edit task in reclaim
                     with (tasks[id] if id in tasks else ReclaimTask()) as task:
+                        if id not in tasks:
+                            tqdm.write(f"Adding {name}")
                         task.name = name
                         task.description = description
                         task.start_date = start_date
