@@ -53,6 +53,8 @@ def sync():
                 name = assignment.name
                 description = f"""**Course: {course.name}**
 
+Points: {assignment.points_possible}
+
 {md(assignment.description) if assignment.description is not None else ""}
 
 [Link to Canvas Assignment]({assignment.html_url})
