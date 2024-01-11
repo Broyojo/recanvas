@@ -113,15 +113,15 @@ Canvas Assignment ID: {id}"""
                         assignments[id] = assignment
                         continue
 
-                if "submission_types" in assignment.__dict__:
-                    if (
-                        "external_tool" in assignment.submission_types
-                        and len(assignment.submission_types) == 1
-                    ):
-                        tqdm.write(
-                            f"[WARNING] Skipping {name} because it only has an external tool for submission, please add manually"
-                        )
-                        continue
+                # if "submission_types" in assignment.__dict__:
+                #     if (
+                #         "external_tool" in assignment.submission_types
+                #         and len(assignment.submission_types) == 1
+                #     ):
+                #         tqdm.write(
+                #             f"[WARNING] Skipping {name} because it only has an external tool for submission, please add manually"
+                #         )
+                #         continue
 
                 # add or edit task in reclaim
                 with tasks[id] if id in tasks else ReclaimTask() as task:
